@@ -14,4 +14,23 @@ class MoviesController < ApplicationController
 
     render({ :template => "movie_templates/show" })
   end
+
+  def create_movie
+    @movie = Movie.new
+    @movie.title = params["query_title"]
+    @movie.year = params["query_year"]
+    @movie.duration = params["query_duration"]
+    @movie.description = params["query_description"]
+    @movie.image = params["query_image"]
+    @movie.director_id = params["query_director_id"]
+
+    if @movie.valid?
+      @movie.save
+      
+      redirect_to("/movies", { :notice => "Movie created successfully." })
+    else
+      redirect_to("/movies", { :notice => "Movie failed to create successfully. " })
+    end
+  end
+
 end

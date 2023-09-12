@@ -24,7 +24,7 @@ class ActorsController < ApplicationController
 
     if @actor.valid?
       @actor.save
-      redirect_to("/actors", { :notice => "Actor created successfuly." })
+      redirect_to("/actors", { :notice => "Actor created successfully." })
     else
       redirect_to("/actors", { :notice => "Actor failed to crate successfully."})
     end
