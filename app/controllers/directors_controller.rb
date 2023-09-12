@@ -39,16 +39,16 @@ class DirectorsController < ApplicationController
 
   def create_director
     @director = Director.new
-    @director.name = params.fetch("query_name")
-    @director.dob = params.fetch("query_dob")
-    @director.bio = params.fetch("query_bio")
-    @director.image = params.fetch("query_image")
+    @director.name = params.fetch["query_name"]
+    @director.dob = params.fetch["query_dob"]
+    @director.bio = params.fetch["query_bio"]
+    @director.image = params.fetch["query_image"]
 
     if @director.valid?
       @director.save
       redirect_to("/directors", { :notice => "Director created successfully." })
     else
-      redirect_to("/dirrectors", { :notice => "Director failed to create successfully." })
+      redirect_to("/directors", { :notice => "Director failed to create successfully." })
     end
   end
   

@@ -14,4 +14,20 @@ class ActorsController < ApplicationController
       
     render({ :template => "actor_templates/show" })
   end
+
+  def create_actor
+    @actor = Actor.new
+    @actor.name = params["query_name"]
+    @actor.dob = params["query_dob"]
+    @actor.bio = params["query_bio"]
+    @actor.image = params["query_image"]
+
+    if @actor.valid?
+      @actor.save
+      redirect_to("/actors", { :notice => "Actor created successfuly." })
+    else
+      redirect_to("/actors", { :notice => "Actor failed to crate successfully."})
+    end
+  end
+
 end
