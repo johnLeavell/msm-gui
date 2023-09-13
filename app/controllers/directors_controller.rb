@@ -38,18 +38,45 @@ class DirectorsController < ApplicationController
   end
 
   def create_director
-    @director = Director.new
-    @director.name = params.fetch["query_name"]
-    @director.dob = params.fetch["query_dob"]
-    @director.bio = params.fetch["query_bio"]
-    @director.image = params.fetch["query_image"]
+    director = Director.new
+    director.name = params.fetch("query_name")
+    director.dob = params.fetch("query_dob")
+    director.bio = params.fetch("query_bio")
+    director.image = params.fetch("query_image")
 
-    if @director.valid?
-      @director.save
+    if director.valid?
+      director.save
       redirect_to("/directors", { :notice => "Director created successfully." })
     else
       redirect_to("/directors", { :notice => "Director failed to create successfully." })
     end
+  end
+
+  def update_director
+    id = params[:path_id]
+
+    the_director = Director.where( id: id).first
+
+    the_director.name = params[:query_name]
+    the_director.dob = params[:query_dob]
+    the_director.bio = params[:query_bio]
+    the_director.image = params[:query_image]
+
+    the_director.save
+
+    redirect_to("/directors/#{the_director.id}")
+  end
+
+  def delete_director
+    id = params[:path_id]
+
+    director = Director.where(id: id)
+
+    the_director = director.first
+    
+    the_director.destroy
+
+    redirect_to("/directors")
   end
   
 end
