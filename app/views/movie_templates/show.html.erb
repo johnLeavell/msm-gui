@@ -115,8 +115,11 @@
     <% matching_directors = Director.where({ :id => dir_id }) %>
     
     <% the_director = matching_directors.at(0) %>
+      <% if the_director.present? %>
 
-    <%= the_director.name %>
+        <%= the_director.name %>
+
+      <% end %>
   </dd>
 
   <dt>

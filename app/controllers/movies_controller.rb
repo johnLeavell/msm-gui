@@ -24,13 +24,9 @@ class MoviesController < ApplicationController
     movie.image = params["query_image"]
     movie.director_id = params["query_director_id"]
 
-    if movie.valid?
       movie.save
       
       redirect_to("/movies", { :notice => "Movie created successfully." })
-    else
-      redirect_to("/movies", { :notice => "Movie failed to create successfully. " })
-    end
   end
 
   def update_movie

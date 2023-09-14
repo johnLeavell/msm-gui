@@ -4,7 +4,7 @@
 
 <hr>
 
-<form action="/movies" method="post">
+<form action="/insert_movie" method="post">
   <div>
     <label for="title_box">
       Title
@@ -108,8 +108,11 @@
       <% matching_directors = Director.where({ :id => a_movie.director_id }) %>
       
       <% the_director = matching_directors.at(0) %>
+        <% if the_director.present? %>
 
-      <%= the_director.name %>
+        <%= the_director.name %>
+
+        <% end %>
     </td>
 
     <td>
